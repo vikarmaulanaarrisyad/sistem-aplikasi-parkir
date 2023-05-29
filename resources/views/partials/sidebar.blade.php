@@ -41,7 +41,8 @@
 
                  @if (Auth()->user()->hasRole('admin'))
                      <li class="nav-item">
-                         <a href="{{ route('dashboard') }}" class="nav-link">
+                         <a href="{{ route('petugas.index') }}"
+                             class="nav-link {{ request()->is('admin/petugas*') ? 'active' : '' }}">
                              <i class="nav-icon fas fa-users"></i>
                              <p>
                                  Petugas

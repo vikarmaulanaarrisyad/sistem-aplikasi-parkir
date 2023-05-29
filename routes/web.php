@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\{
-    DashboardController
+    DashboardController,
+    PetugasController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,9 @@ Route::group([
         'middleware' => 'role:admin',
         'prefix' => 'admin'
     ], function () {
-        //
+        // route petugas
+        Route::get('/petugas/data', [PetugasController::class, 'data'])->name('petugas.data');
+        Route::resource('petugas', PetugasController::class)->except('edit', 'create');
     });
     Route::group([
         'middleware' => 'role:karyawan',

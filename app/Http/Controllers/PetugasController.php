@@ -82,17 +82,18 @@ class PetugasController extends Controller
         try {
             //insert ke tabel user
             $user = new User();
-            $user->name = $request->name;
+            $user->name = trim($request->name);
             $user->email = $request->email;
             $user->password = Hash::make('petugas');
-            $user->username = $request->name;
+            $user->pass = 'petugas';
+            $user->username = str_replace(' ','',trim(strtolower($request->name)));
             $user->role_id = 2;
             $user->save();
 
             //insert ke tabel petugas
             $petugas = new Petugas();
             $petugas->user_id = $user->id;
-            $petugas->name = $request->name;
+            $petugas->name = trim($request->name);
             $petugas->save();
 
             DB::commit();
@@ -109,7 +110,7 @@ class PetugasController extends Controller
     public function show($id)
     {
         $petugas = Petugas::with('user')->findOrfail($id);
-        $petugas->email = $petugas['user']['email'];
+        $petugas->email = $petugas->user->email;
 
         return response()->json(['data' => $petugas]);
     }
@@ -125,16 +126,58 @@ class PetugasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Petugas $petugas)
+    public function update(Request $request, $id)
     {
-        //
+        $petugas = Petugas::findOrfail($id);
+
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|unique:users,email,' . $petugas->user_id,
+        ];
+
+        $message = [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.unique' => 'Email sudah ada sebelumnya.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'message' => 'Silakan periksa kembali isian Anda dan coba kembali.'], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            //update ke tabel petugas
+            $petugas->name = trim($request->name);
+            $petugas->save();
+
+            //update table users
+            $user = User::findOrfail($petugas->user_id);
+            $user->name = trim($request->name);
+            $user->email = $request->email;
+            $user->username = str_replace(' ', '', trim(strtolower($request->name)));
+            $user->save();
+
+            DB::commit();
+            return response()->json(['message' => 'Data berhasil disimpan!']);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['errors' => $th, 'message' => 'Silakan periksa kembali isian Anda dan coba kembali.'], 422);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Petugas $petugas)
+    public function destroy($id)
     {
-        //
+        $petugas = Petugas::findOrfail($id);
+
+        $petugas->trashed();
+        $petugas->delete();
+
+        return response()->json(['message' => 'Data berhasil dihapus!']);
     }
 }

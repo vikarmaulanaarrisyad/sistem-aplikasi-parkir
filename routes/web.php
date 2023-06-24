@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\{
     DashboardController,
+    ParkirController,
     PetugasController
 };
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,9 @@ Route::group([
         Route::get('/petugas/{id}/detail', [PetugasController::class, 'detail'])->name('petugas.detail');
         Route::post('/petugas/import/excel', [PetugasController::class, 'importExcel'])->name('petugas.import_excel');
 
+        //route parkir
+        Route::get('/parkir/data', [ParkirController::class, 'data'])->name('parkir.data');
+        Route::resource('parkir', ParkirController::class)->except('edit', 'create');
     });
     Route::group([
         'middleware' => 'role:karyawan',

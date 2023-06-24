@@ -53,7 +53,7 @@
                  @if (auth()->user()->hasRole('karyawan') ||
                          auth()->user()->hasRole('admin'))
                      <li class="nav-item">
-                         <a href="{{ route('dashboard') }}" class="nav-link ">
+                         <a href="{{ route('parkir.index') }}" class="nav-link {{ request()->is('admin/parkir*') ? 'active' : '' }}">
                              <i class="nav-icon fas fa-parking"></i>
                              <p>
                                  Parkir

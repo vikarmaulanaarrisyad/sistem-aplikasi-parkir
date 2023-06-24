@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Parkir;
+use App\Models\Petugas;
 use Illuminate\Http\Request;
 
 class ParkirController extends Controller
@@ -12,7 +13,72 @@ class ParkirController extends Controller
      */
     public function index()
     {
-        //
+        $petugas = Petugas::pluck('name', 'id');
+
+        return view('admin.parkir.index', compact('petugas'));
+    }
+
+    public function data(Request $request)
+    {
+        $query = Parkir::with('petugas')
+            ->when($request->has('filter_status') != "" && $request->filter_status != "",  function ($q) use ($request) {
+                $q->where('status', $request->filter_status);
+            })
+            ->when($request->has('filter_petugas') != "" && $request->filter_petugas != "",  function ($q) use ($request) {
+                $q->where('petugas_id', $request->filter_petugas);
+            });
+
+
+        return datatables($query)
+            ->addIndexColumn()
+            ->addColumn('foto_wajah', function ($query) {
+                if (!empty($query->user->path_image)) {
+                    return '
+                        <img src="' . Storage::url($query->user->path_image) . '">
+                    ';
+                }
+                return '
+                    <img src="' . asset('assets/images/not.png') . '" class="thumbnail img-responsive" style="width:40px">
+                ';
+            })
+            ->addColumn('foto_plat', function ($query) {
+                if (!empty($query->user->path_image)) {
+                    return '
+                        <img src="' . Storage::url($query->user->path_image) . '">
+                    ';
+                }
+                return '
+                    <img src="' . asset('assets/images/not.png') . '" class="thumbnail img-responsive" style="width:40px">
+                ';
+            })
+            ->addColumn('code_qr', function ($query) {
+                if (!empty($query->user->path_image)) {
+                    return '
+                        <img src="' . Storage::url($query->user->path_image) . '">
+                    ';
+                }
+                return '
+                    <img src="' . asset('assets/images/not.png') . '" class="thumbnail img-responsive" style="width:40px">
+                ';
+            })
+            ->editColumn('status', function ($query) {
+                return '
+                    <span class="badge badge-' . $query->statusColor() . '">' . $query->status . '</span>
+                ';
+            })
+            ->editColumn('petugas', function ($query) {
+                if (empty($query->petugas_id)) {
+                    return '
+                    <span class="badge badge-warning">Belum melakukan scan keluar</span>
+                ';
+                }
+                return '
+                    <span class="badge badge-success">' . $query->petugas->name . '</span>
+                ';
+            })
+
+            ->escapeColumns([])
+            ->make(true);
     }
 
     /**

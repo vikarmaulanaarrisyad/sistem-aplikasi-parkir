@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('parkirs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable()->comment('petugas parkir');
+            $table->unsignedBigInteger('petugas_id')->nullable()->comment('petugas parkir');
             $table->string('code_qr');
             $table->string('foto_wajah')->default('default.jpg');
             $table->string('foto_plat')->default('default.jpg');

@@ -34,6 +34,7 @@ Route::group([
         // route petugas
         Route::get('/petugas/data', [PetugasController::class, 'data'])->name('petugas.data');
         Route::resource('/petugas', PetugasController::class)->except('edit', 'create');
+        Route::get('/petugas/{id}/detail', [PetugasController::class, 'detail'])->name('petugas.detail');
         Route::post('/petugas/import/excel', [PetugasController::class, 'importExcel'])->name('petugas.import_excel');
 
     });

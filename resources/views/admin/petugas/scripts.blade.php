@@ -2,6 +2,7 @@
     <script>
         let modal = '#modal-form';
         let modal2 = '#import_petugas';
+        let modalDetail = '#modal-detail';
         let button = '#submitBtn';
         let table;
 
@@ -9,7 +10,7 @@
             $('#spinner-border').hide();
         });
 
-        table = $('.table').DataTable({
+        table = $('#table').DataTable({
             processing: true,
             autoWidth: false,
             ajax: {
@@ -68,6 +69,19 @@
                     $('#spinner-border').hide();
                     $(button).prop('disabled', false);
                 });
+        }
+
+        function detailForm(url, title = 'Detail Petugas') {
+            $.get(url)
+                .done(response => {
+                    $(modalDetail).modal('show');
+                    $(`${modalDetail} .modal-title`).text(title);
+
+                    $('.name').text(response.data.name)
+                    $('.email').text(response.data.email)
+                    $('.password').text(response.data.pass)
+                })
+
         }
 
         function submitForm(originalForm) {

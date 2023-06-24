@@ -43,6 +43,7 @@ class PetugasController extends Controller
                 return '
                 <div class="btn-group">
                     <button onclick="editForm(`' . route('petugas.show', $query->id) . '`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
+                    <button onclick="detailForm(`' . route('petugas.detail', $query->id) . '`)" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> Detail</button>
                     <button onclick="deleteData(`' . route('petugas.destroy', $query->id) . '`, `' . $query->name . '`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
                 </div>
                 ';
@@ -114,6 +115,16 @@ class PetugasController extends Controller
     {
         $petugas = Petugas::with('user')->findOrfail($id);
         $petugas->email = $petugas->user->email;
+
+        return response()->json(['data' => $petugas]);
+    }
+
+    public function detail($id)
+    {
+        $petugas = Petugas::with('user')->findOrfail($id);
+        $petugas->email = $petugas->user->email;
+        $petugas->pass = $petugas->user->pass;
+
 
         return response()->json(['data' => $petugas]);
     }

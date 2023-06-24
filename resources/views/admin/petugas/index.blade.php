@@ -34,6 +34,7 @@
     </div>
     @include('admin.petugas.form')
     @include('admin.petugas.import_form')
+    @include('admin.petugas.detail_form')
 @endsection
 @includeIf('include.datatable')
 

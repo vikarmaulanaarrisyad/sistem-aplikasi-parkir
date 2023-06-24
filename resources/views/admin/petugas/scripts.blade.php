@@ -1,6 +1,7 @@
 @push('scripts')
     <script>
         let modal = '#modal-form';
+        let modal2 = '#import_petugas';
         let button = '#submitBtn';
         let table;
 
@@ -161,6 +162,16 @@
                         });
                 }
             })
+        }
+
+        function importForm(url, title = 'Import Petugas') {
+            $(modal2).modal('show');
+            $(`${modal2} .modal-title`).text(title);
+            $(`${modal2} form`).attr('action', url);
+            $(`${modal2} [name=_method]`).val('POST');
+            $('#spinner-border').hide();
+            $(button).prop('disabled', false);
+            resetForm(`${modal2} form`);
         }
     </script>
 @endpush

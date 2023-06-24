@@ -33,7 +33,9 @@ Route::group([
     ], function () {
         // route petugas
         Route::get('/petugas/data', [PetugasController::class, 'data'])->name('petugas.data');
-        Route::resource('petugas', PetugasController::class)->except('edit', 'create');
+        Route::resource('/petugas', PetugasController::class)->except('edit', 'create');
+        Route::post('/petugas/import/excel', [PetugasController::class, 'importExcel'])->name('petugas.import_excel');
+
     });
     Route::group([
         'middleware' => 'role:karyawan',

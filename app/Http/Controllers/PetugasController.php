@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PetugasImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Petugas;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -86,7 +89,7 @@ class PetugasController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make('petugas');
             $user->pass = 'petugas';
-            $user->username = str_replace(' ','',trim(strtolower($request->name)));
+            $user->username = str_replace(' ', '', trim(strtolower($request->name)));
             $user->role_id = 2;
             $user->save();
 
@@ -179,5 +182,32 @@ class PetugasController extends Controller
         $petugas->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus!']);
+    }
+
+    public function importExcel(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'excel_file' => 'required|mimes:xls,xlsx'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Tidak ada file yang diunggah!'], 422);
+        }
+
+        if ($request->hasFile('excel_file')) {
+            $file = $request->file('excel_file');
+
+            if ($file->isValid()) {
+                try {
+                    Excel::import(new PetugasImport, $file);
+
+                    return response()->json(['message' => 'Data berhasil diimpor!']);
+                } catch (Exception $e) {
+                    return response()->json(['message' => 'kesalahan dalam memproses file Excel!', 'errors' => $e],422);
+                }
+            } else {
+                return response()->json(['message' => 'Import gagal, file tidak valid'],422);
+            }
+        }
     }
 }

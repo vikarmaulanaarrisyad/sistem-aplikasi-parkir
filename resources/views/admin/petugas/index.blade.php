@@ -16,6 +16,8 @@
                 <x-slot name="header">
                     <button onclick="addForm(`{{ route('petugas.store') }}`)" class="btn btn-primary btn-sm"><i
                             class="fas fa-plus-circle"></i> Tambah Data</button>
+                    {{-- <button  onclick="importForm(`{{ route('petugas.import_excel') }}`)" class="btn btn-success btn-sm"><i
+                            class="fas fa-upload"></i> Upload Petugas</button> --}}
                 </x-slot>
                 <x-table>
                     <x-slot name="thead">
@@ -31,6 +33,7 @@
         </div>
     </div>
     @include('admin.petugas.form')
+    @include('admin.petugas.import_form')
 @endsection
 @includeIf('include.datatable')
 

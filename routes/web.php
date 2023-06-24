@@ -4,7 +4,8 @@ use App\Http\Controllers\{
     DashboardController,
     ParkirController,
     PetugasController,
-    ScanController
+    ScanController,
+    UserProfileInformationController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,8 @@ Route::group([
 ], function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/user/profile/password', [UserProfileInformationController::class, 'showPassword'])
+    ->name('profile.show.password');
 
     Route::group([
         'middleware' => 'role:admin',

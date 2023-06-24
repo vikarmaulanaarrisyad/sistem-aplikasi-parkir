@@ -43,9 +43,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <th style="width: 20%">Tanggal Masuk </th>
+                            <th style="width: 20%">Waktu Masuk </th>
                             <th style="width: 2%">:</th>
-                            <td id="tglmasuk"></td>
+                            <td id="waktumasuk"></td>
+                        </tr>
+                        <tr>
+                            <th style="width: 20%">Waktu Keluar </th>
+                            <th style="width: 2%">:</th>
+                            <td id="waktukeluar"></td>
                         </tr>
                         <tr>
                             <th style="width: 20%">Status </th>

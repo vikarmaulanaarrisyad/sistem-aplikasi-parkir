@@ -19,7 +19,8 @@ class ScanController extends Controller
         $parkir = Parkir::where('code_qr', $qrcode)->first();
         $parkir->foto_plat = Storage::url($parkir->foto_plat);
         $parkir->foto_wajah = Storage::url($parkir->foto_wajah);
-        $parkir->tglmasuk = tanggal_indonesia($parkir->created_at);
+        $parkir->waktumasuk = date('d-m-Y H:i:s', strtotime($parkir->created_at));
+        $parkir->waktukeluar = date('d-m-Y H:i:s', strtotime($parkir->updated_at));
 
         return response()->json(['data' => $parkir]);
     }

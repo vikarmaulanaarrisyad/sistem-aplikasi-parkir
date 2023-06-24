@@ -1,7 +1,7 @@
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
      <!-- Brand Logo -->
-     <a href="index3.html" class="brand-link">
-         <img src="{{ asset('/AdminLTE') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+     <a href="{{ route('dashboard') }}" class="brand-link">
+         <img src="{{ Storage::url(auth()->user()->path_image) }}" alt="AdminLTE Logo"
              class="brand-image img-circle elevation-3" style="opacity: .8">
          <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
      </a>
@@ -10,7 +10,7 @@
      <div class="sidebar">
          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
              <div class="image">
-                 <img src="{{ asset('/AdminLTE') }}/dist/img/user2-160x160.jpg" class="img-circle elevation-2"
+                 <img src="{{  Storage::url(auth()->user()->path_image) }}" class="img-circle elevation-2"
                      alt="User Image">
              </div>
              <div class="info">
@@ -49,11 +49,9 @@
                              </p>
                          </a>
                      </li>
-                 @endif
-                 @if (auth()->user()->hasRole('karyawan') ||
-                         auth()->user()->hasRole('admin'))
                      <li class="nav-item">
-                         <a href="{{ route('parkir.index') }}" class="nav-link {{ request()->is('admin/parkir*') ? 'active' : '' }}">
+                         <a href="{{ route('parkir.index') }}"
+                             class="nav-link {{ request()->is('admin/parkir*') ? 'active' : '' }}">
                              <i class="nav-icon fas fa-parking"></i>
                              <p>
                                  Parkir
@@ -61,6 +59,7 @@
                          </a>
                      </li>
                  @endif
+
                  @if (auth()->user()->hasRole('admin'))
                      <li class="nav-header">REPORT</li>
                      <li class="nav-item">
@@ -73,7 +72,8 @@
                      </li>
                  @else
                      <li class="nav-item">
-                         <a href="{{ route('scan.index') }}" class="nav-link {{ request()->is('karyawan/scan') ? 'active' : ''}}">
+                         <a href="{{ route('scan.index') }}"
+                             class="nav-link {{ request()->is('karyawan/scan') ? 'active' : '' }}">
                              <i class="nav-icon fas fa-qrcode"></i>
                              <p>
                                  SCAN QR
@@ -83,10 +83,20 @@
                  @endif
                  <li class="nav-header">MANAJEMEN AKUN</li>
                  <li class="nav-item">
-                     <a href="{{ route('dashboard') }}" class="nav-link">
+                     <a href="{{ route('profile.show') }}"
+                         class="nav-link {{ request()->is('user/profile') ? 'active' : '' }}">
                          <i class="nav-icon fas fa-user"></i>
                          <p>
                              Profil
+                         </p>
+                     </a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="{{ route('profile.show.password') }}"
+                         class="nav-link {{ request()->is('user/profile/password') ? 'active' : '' }}">
+                         <i class="nav-icon fas fa-unlock"></i>
+                         <p>
+                             Ubah Password
                          </p>
                      </a>
                  </li>

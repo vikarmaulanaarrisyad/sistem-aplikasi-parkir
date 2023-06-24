@@ -44,9 +44,9 @@ class PetugasController extends Controller
                 <div class="btn-group">
                     <button onclick="editForm(`' . route('petugas.show', $query->id) . '`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
                     <button onclick="detailForm(`' . route('petugas.detail', $query->id) . '`)" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> Detail</button>
-                    <button onclick="deleteData(`' . route('petugas.destroy', $query->id) . '`, `' . $query->name . '`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                </div>
-                ';
+                    </div>
+                    ';
+                    // <button onclick="deleteData(`' . route('petugas.destroy', $query->id) . '`, `' . $query->name . '`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
             })
             ->escapeColumns([])
             ->make(true);

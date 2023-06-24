@@ -11,13 +11,15 @@
                 success: function(response) {
                     $('#wajah').attr('src', response.data.foto_wajah);
                     $('#plat').attr('src', response.data.foto_plat);
-                    $('#tglmasuk').text(response.data.tglmasuk);
+                    $('#waktumasuk').text(response.data.waktumasuk);
+                    $('#waktukeluar').text(response.data.waktukeluar);
                     $('#status').text(response.data.status);
                 },
                 error: function(response) {
                     $('#wajah').attr('src', "");
                     $('#plat').attr('src', "");
-                    $('#tglmasuk').text("");
+                    $('#waktumasuk').text("");
+                    $('#waktukeluar').text("");
                     $('#status').text("");
                 }
             });
@@ -30,8 +32,6 @@
             $('#code_qr').text(decodedText);
 
             let qrcode = decodedText;
-
-
 
             html5QrcodeScanner.clear();
 
@@ -87,7 +87,8 @@
                     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
                     $('#wajah').attr('src', "");
                     $('#plat').attr('src', "");
-                    $('#tglmasuk').text("");
+                    $('#waktumasuk').text("");
+                    $('#waktukeluar').text("");
                     $('#status').text("");
                 }
             })

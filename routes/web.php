@@ -3,7 +3,8 @@
 use App\Http\Controllers\{
     DashboardController,
     ParkirController,
-    PetugasController
+    PetugasController,
+    ScanController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,9 @@ Route::group([
         'middleware' => 'role:karyawan',
         'prefix' => 'karyawan'
     ], function () {
-        //
+        //Scanner
+        Route::get('/scan/data/{code_qr}',[ScanController::class,'data'])->name('scan.data');
+        Route::get('/scan',[ScanController::class,'index'])->name('scan.index');
+        Route::post('/scan/validasi_qrcode',[ScanController::class,'validasiQrCode'])->name('scan.validasi_qrcode');
     });
 });

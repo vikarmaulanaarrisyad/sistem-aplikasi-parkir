@@ -73,7 +73,7 @@
                      </li>
                  @else
                      <li class="nav-item">
-                         <a href="{{ route('dashboard') }}" class="nav-link">
+                         <a href="{{ route('scan.index') }}" class="nav-link {{ request()->is('karyawan/scan') ? 'active' : ''}}">
                              <i class="nav-icon fas fa-qrcode"></i>
                              <p>
                                  SCAN QR

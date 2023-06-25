@@ -33,11 +33,11 @@ class ScanController extends Controller
         $qrCode = Parkir::where('code_qr', $request->qrcode)->first();
 
         if ($qrCode == null) {
-            return response()->json(['message' => 'Data tidak ditemukan dalam sistem'], 400);
+            return response()->json(['message' => 'Data parkir kendaraan tidak ditemukan dalam sistem, silahkan inputkan manual'], 400);
         }
 
         if ($qrCode->status == "Keluar") {
-            return response()->json(['message' => 'Data tidak valid'], 400);
+            return response()->json(['message' => 'QR Code sudah digunakan'], 400);
         }
 
         $qrCode->update([
@@ -45,6 +45,6 @@ class ScanController extends Controller
             'petugas_id' => $petugas->id,
         ]);
 
-        return response()->json(['message' => 'Data valid']);
+        return response()->json(['message' => 'Data parkir kendaraan valid']);
     }
 }

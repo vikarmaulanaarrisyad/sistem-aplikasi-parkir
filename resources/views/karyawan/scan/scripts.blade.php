@@ -45,9 +45,9 @@
                 buttonsStyling: true,
             })
             swalWithBootstrapButtons.fire({
-                title: 'Sistem Parkir PHB',
+                title: 'Sistem Informasi Parkir QR Code PHB',
                 text: 'No parkir ' + qrcode +
-                    ' valid',
+                    '',
                 icon: 'warning',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
@@ -70,7 +70,7 @@
                                 title: 'Berhasil',
                                 text: response.message,
                                 showConfirmButton: false,
-                                timer: 2000
+                                timer: 3000
                             });
                         },
                         error: function(response) {

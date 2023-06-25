@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Parkir;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ParkirController extends Controller
 {
@@ -28,13 +31,12 @@ class ParkirController extends Controller
                 $q->where('petugas_id', $request->filter_petugas);
             });
 
-
         return datatables($query)
             ->addIndexColumn()
             ->addColumn('foto_wajah', function ($query) {
-                if (!empty($query->user->path_image)) {
+                if (isEmpty($query->foto_wajah)) {
                     return '
-                        <img src="' . Storage::url($query->user->path_image) . '">
+                        <img src="' . Storage::url($query->foto_wajah) . '" style="width: 40px">
                     ';
                 }
                 return '
@@ -42,9 +44,9 @@ class ParkirController extends Controller
                 ';
             })
             ->addColumn('foto_plat', function ($query) {
-                if (!empty($query->user->path_image)) {
+                if (!empty($query->foto_plat)) {
                     return '
-                        <img src="' . Storage::url($query->user->path_image) . '">
+                        <img src="' . Storage::url($query->foto_plat) . '" style="width: 40px">
                     ';
                 }
                 return '
@@ -66,8 +68,14 @@ class ParkirController extends Controller
                     <span class="badge badge-success">' . $query->petugas->name . '</span>
                 ';
             })
+            ->editColumn('waktu_masuk', function ($query) {
+                return date('d-m-Y H:i:s', strtotime($query->created_at));
+            })
             ->editColumn('waktu_keluar', function ($query) {
-                return date('d-m-Y H:i:s', strtotime($query->updated_at));
+                if ($query->status == 'Keluar') {
+                    return date('d-m-Y H:i:s', strtotime($query->updated_at));
+                }
+                return '-';
             })
 
             ->escapeColumns([])

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ParkirApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('/parkir', ParkirApiController::class);
+Route::post('/parkir/upload_image', [ParkirApiController::class, 'uploadImage']);

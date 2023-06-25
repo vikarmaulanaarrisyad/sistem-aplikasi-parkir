@@ -53,7 +53,8 @@
                             <th style="width: 130px">Foto Plat</th>
                             <th>Status</th>
                             <th>Petugas</th>
-                            <th>Waktu Keluar</th>
+                            <th>Masuk</th>
+                            <th>Keluar</th>
                         </tr>
                     </x-slot>
                 </x-table>

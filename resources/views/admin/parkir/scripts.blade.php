@@ -42,6 +42,9 @@
                     data: 'petugas'
                 },
                 {
+                    data: 'waktu_masuk'
+                },
+                {
                     data: 'waktu_keluar'
                 },
 

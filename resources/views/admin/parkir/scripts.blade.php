@@ -36,15 +36,13 @@
                     sortable: false
                 },
                 {
-                    data: 'code_qr',
-                    searchable: false,
-                    sortable: false
-                },
-                {
                     data: 'status'
                 },
                 {
                     data: 'petugas'
+                },
+                {
+                    data: 'waktu_keluar'
                 },
 
             ]

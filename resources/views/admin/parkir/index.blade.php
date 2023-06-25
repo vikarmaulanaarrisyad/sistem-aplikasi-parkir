@@ -53,9 +53,9 @@
                             <th style="width: 8%">No</th>
                             <th style="width: 130px">Foto Wajah</th>
                             <th style="width: 130px">Foto Plat</th>
-                            <th style="width: 130px">QR Code</th>
                             <th>Status</th>
                             <th>Petugas</th>
+                            <th>Waktu Keluar</th>
                         </tr>
                     </x-slot>
                 </x-table>

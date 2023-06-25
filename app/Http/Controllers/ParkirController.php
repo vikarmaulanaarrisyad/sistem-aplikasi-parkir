@@ -51,16 +51,6 @@ class ParkirController extends Controller
                     <img src="' . asset('assets/images/not.png') . '" class="thumbnail img-responsive" style="width:40px">
                 ';
             })
-            ->addColumn('code_qr', function ($query) {
-                if (!empty($query->user->path_image)) {
-                    return '
-                        <img src="' . Storage::url($query->user->path_image) . '">
-                    ';
-                }
-                return '
-                    <img src="' . asset('assets/images/not.png') . '" class="thumbnail img-responsive" style="width:40px">
-                ';
-            })
             ->editColumn('status', function ($query) {
                 return '
                     <span class="badge badge-' . $query->statusColor() . '">' . $query->status . '</span>
@@ -75,6 +65,9 @@ class ParkirController extends Controller
                 return '
                     <span class="badge badge-success">' . $query->petugas->name . '</span>
                 ';
+            })
+            ->editColumn('waktu_keluar', function ($query) {
+                return date('d-m-Y H:i:s', strtotime($query->updated_at));
             })
 
             ->escapeColumns([])

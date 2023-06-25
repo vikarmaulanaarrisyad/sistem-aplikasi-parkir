@@ -77,6 +77,7 @@
                     $(modalDetail).modal('show');
                     $(`${modalDetail} .modal-title`).text(title);
 
+                    $('.foto').attr('src',response.data.foto)
                     $('.name').text(response.data.name)
                     $('.email').text(response.data.email)
                     $('.password').text(response.data.pass)

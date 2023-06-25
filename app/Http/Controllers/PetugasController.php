@@ -32,7 +32,7 @@ class PetugasController extends Controller
             ->addColumn('foto', function ($query) {
                 if (!empty($query->user->path_image)) {
                     return '
-                        <img src="' . Storage::url($query->user->path_image) . '">
+                        <img class="img-circle img-responsive" src="' . Storage::url($query->user->path_image) . '" style="width:40px; height:40px">
                     ';
                 }
                 return '
@@ -124,7 +124,7 @@ class PetugasController extends Controller
         $petugas = Petugas::with('user')->findOrfail($id);
         $petugas->email = $petugas->user->email;
         $petugas->pass = $petugas->user->pass;
-
+        $petugas->foto = Storage::url($petugas->user->path_image);
 
         return response()->json(['data' => $petugas]);
     }

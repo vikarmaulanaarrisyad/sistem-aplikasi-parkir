@@ -11,6 +11,11 @@
                 <table class="table" id="table-detail" style="width: 100%">
                     <tbody>
                         <tr>
+                            <td rowspan="4">
+                                <img class="foto img-thumbnail" src="" alt="">
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Nama</td>
                             <td>:</td>
                             <td class="name"></td>

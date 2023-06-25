@@ -8,7 +8,11 @@
 
     <title>{{ config('app.name') }} - @yield('title')</title>
 
-    {{-- <link rel="icon" href="{{ url($setting->path_image ?? '') }}" type="image/*"> --}}
+    <link rel="icon" href="{{ asset('assets/logo/logo.jpg') }}" type="image/*">
+
+    {{-- Animation css --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/font-digital/SFDigitalReadout-HeavyObliq.ttf') }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -33,6 +37,21 @@
     <link rel="stylesheet" href="{{ asset('/AdminLTE/dist/css/adminlte.min.css') }}">
 
     <style>
+        .element {
+            visibility: hidden;
+        }
+
+        .animasi-teks {
+            font-size: 16px;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            -webkit-animation: typing 5s steps(70, end);
+            animation: animasi-ketik 5s steps(70, end);
+        }
+
+
+
         .note-editor {
             margin-bottom: 0;
         }
@@ -126,6 +145,13 @@
             animation-iteration-count: infinite;
         }
 
+        @import url('https://fonts.googleapis.com/css2?family=Digital+7&display=swap');
+
+        #currentTime {
+            font-family: 'Digital-7', sans-serif;
+            /* Sesuaikan ukuran font sesuai kebutuhan */
+        }
+
         @keyframes loading {
             from {
                 transform: rotate(0deg);
@@ -135,12 +161,19 @@
                 transform: rotate(360deg);
             }
         }
+
+        @keyframes animasi-ketik {
+            from {
+                width: 0;
+            }
+        }
     </style>
 
     @stack('css')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"
+    onload="displayCurrentTime()">
 
     <div class="wrapper">
 
@@ -222,6 +255,41 @@
     <script src="{{ asset('/js/custom.js') }}"></script>
 
     @stack('scripts')
+
+    <script>
+        function animateElements() {
+            var elements = document.querySelectorAll('.element');
+            for (var i = 0; i < elements.length; i++) {
+                var element = elements[i];
+                element.style.visibility = 'visible';
+                element.classList.add('animasi-teks', 'animasi-teks');
+                setTimeout(function() {
+                    element.classList.remove('animasi-teks', 'animasi-teks');
+                }, 8000); // Hapus class animasi setelah 1 detik
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            animateElements();
+            setInterval(animateElements, 5000); // Mengulangi setiap 5 detik
+        });
+    </script>
+
+    <script>
+        function displayCurrentTime() {
+            var currentTime = new Date();
+            var options = {
+                timeZone: 'Asia/Jakarta',
+                hour12: false
+            };
+            var timeString = currentTime.toLocaleTimeString('id-ID', options) + ' WIB';
+
+            var timeElement = document.getElementById('currentTime');
+            timeElement.textContent = timeString;
+        }
+
+        setInterval(displayCurrentTime, 1000); // Memperbarui waktu setiap detik
+    </script>
 
 
 </body>

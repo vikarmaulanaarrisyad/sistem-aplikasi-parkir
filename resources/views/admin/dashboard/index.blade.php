@@ -6,4 +6,5 @@
 
 @section('content')
     @include('admin.dashboard.small_box')
+    @include('admin.dashboard.slider')
 @endsection

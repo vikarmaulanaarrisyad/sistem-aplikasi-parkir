@@ -16,6 +16,32 @@ class Parkir extends Model
         return $this->hasOne(Petugas::class, 'id', 'petugas_id');
     }
 
+    //mendapatkan status parkir masuk
+    public function scopeParkirMasuk()
+    {
+        $currentDateTime = $this->tglSekarang();
+        
+        return $this->where('status', 'Masuk')
+            ->where('updated_at', '>=', date('Y-m-d 05:00:00'))
+            ->where('updated_at', '<=', $currentDateTime)
+            ->count();
+    }
+
+    //mendapatkan status parkir keluar
+    public function scopeParkirKeluar()
+    {
+        $currentDateTime = $this->tglSekarang();
+
+        return $this->where('status', 'Keluar')
+            ->where('updated_at', '>=', date('Y-m-d 05:00:00'))
+            ->where('updated_at', '<=', $currentDateTime)
+            ->count();
+    }
+
+    function tglSekarang()  {
+        return date('Y-m-d H:i:s');
+    }
+
     public function statusColor()
     {
         $color = '';

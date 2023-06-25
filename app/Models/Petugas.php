@@ -15,4 +15,9 @@ class Petugas extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function scopeTotalPetugas()
+    {
+        return $this->count();
+    }
 }

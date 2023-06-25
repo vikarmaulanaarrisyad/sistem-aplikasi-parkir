@@ -1,24 +1,5 @@
 <div class="row">
     <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box h-3">
-            <div class="ribbon-wrapper">
-                <div class="ribbon bg-primary">
-                    PHB
-                </div>
-            </div>
-            <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-user"></i></span>
-            <div class="info-box-content">
-                <span class="info-box-text">Total Petugas</span>
-                <span class="info-box-number">
-                    {{ $totalPetugas }}
-                </span>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3">
             <div class="ribbon-wrapper">
                 <div class="ribbon bg-primary">
@@ -30,9 +11,7 @@
                 <span class="info-box-text">Total Parkir Keluar</span>
                 <span class="info-box-number">{{ $totalParkirKeluar }}</span>
             </div>
-
         </div>
-
     </div>
 
 

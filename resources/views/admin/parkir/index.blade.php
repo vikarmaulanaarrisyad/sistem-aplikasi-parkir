@@ -44,9 +44,7 @@
                     </div>
                 </div>
                 {{-- End Filter --}}
-
                 <hr>
-
                 <x-table>
                     <x-slot name="thead">
                         <tr>

@@ -5,6 +5,7 @@ use App\Http\Controllers\{
     ParkirController,
     PetugasController,
     ScanController,
+    SettingController,
     UserProfileInformationController
 };
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,7 @@ Route::group([
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/user/profile/password', [UserProfileInformationController::class, 'showPassword'])
-    ->name('profile.show.password');
+        ->name('profile.show.password');
 
     Route::group([
         'middleware' => 'role:admin',
@@ -45,14 +46,16 @@ Route::group([
         //route parkir
         Route::get('/parkir/data', [ParkirController::class, 'data'])->name('parkir.data');
         Route::resource('parkir', ParkirController::class)->except('edit', 'create');
+
+        Route::resource('setting', SettingController::class);
     });
     Route::group([
         'middleware' => 'role:karyawan',
         'prefix' => 'karyawan'
     ], function () {
         //Scanner
-        Route::get('/scan/data/{code_qr}',[ScanController::class,'data'])->name('scan.data');
-        Route::get('/scan',[ScanController::class,'index'])->name('scan.index');
-        Route::post('/scan/validasi_qrcode',[ScanController::class,'validasiQrCode'])->name('scan.validasi_qrcode');
+        Route::get('/scan/data/{code_qr}', [ScanController::class, 'data'])->name('scan.data');
+        Route::get('/scan', [ScanController::class, 'index'])->name('scan.index');
+        Route::post('/scan/validasi_qrcode', [ScanController::class, 'validasiQrCode'])->name('scan.validasi_qrcode');
     });
 });

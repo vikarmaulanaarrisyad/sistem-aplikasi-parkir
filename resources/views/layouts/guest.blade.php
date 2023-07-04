@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -16,10 +17,13 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
 
     <!-- Fontawesome -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <style>
         body {
@@ -30,20 +34,24 @@
         .login {
             min-height: 100vh;
         }
+
         .bg-image {
-            background-image: url('{{ asset("/assets/icon/login-page.jpg") }}');
+            background-image: url('{{ Storage::url($setting->logo_login) ?? asset('/assets/icon/login-page.jpg') }}');
             background-size: cover;
             background-position: center;
         }
+
         .login-heading {
             font-weight: 300;
         }
+
         .login .form-control {
             height: calc(1.5em + 1rem + 2px);
             padding: 0.5rem 1rem;
             line-height: 1.5;
             border-radius: 0.3rem;
         }
+
         .btn-login {
             font-size: 0.9rem;
             letter-spacing: 0.05rem;
@@ -63,5 +71,18 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
     </script>
 
+    <script>
+        $('.custom-control-input').click(function() {
+            if ($(this).is(':checked')) {
+                $('#password').attr('type', 'text');
+                $('#password_confirmation').attr('type', 'text');
+            } else {
+                $('#password').attr('type', 'password');
+                $('#password_confirmation').attr('type', 'password');
+            }
+        });
+    </script>
+
 </body>
+
 </html>

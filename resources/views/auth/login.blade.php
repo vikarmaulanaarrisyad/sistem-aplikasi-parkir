@@ -13,9 +13,10 @@
                         <div class="row">
                             <div class="col-md-9 col-lg-8 mx-auto">
                                 <a href="{{ url('/') }}">
-                                    <img src="{{ asset('/img/logo.png') }}" alt="" class="w-50 mb-4">
+                                    <img src="{{ Storage::url($setting->login_header) ?? asset('/img/logo.png') }}" alt="" class="w-50 mb-4">
                                 </a>
-                                <h4 class="login-heading mb-4">Selamat Datang Kembali!</h4>
+                                <h4 class="login-heading mb-2">{{ $setting->nama_aplikasi }}</h4>
+                                <h6 class="login-heading mb-4">{{ $setting->diskripsi_aplikasi }}</h6>
 
                                 {{-- Form --}}
                                 <form action="{{ route('login') }}" method="post">
@@ -47,9 +48,8 @@
                                     <div class="form-group d-flex justify-content-between align-items-center mb-3">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                            <label for="customCheck1" class="custom-control-label">Ingat Saya?</label>
+                                            <label for="customCheck1" class="custom-control-label">Show password</label>
                                         </div>
-                                        <a href="#" class="small mt-1 text-muted">Lupa Password?</a>
                                     </div>
 
                                     <div>
@@ -60,7 +60,7 @@
 
                                     <div class="text-center mt-3">
                                         <div class="text-muted">
-                                           SISTEM APLIKASI PARKIR QR CODE PHB
+                                          {{ $setting->nama_aplikasi }}
                                         </div>
                                     </div>
                                 </form>

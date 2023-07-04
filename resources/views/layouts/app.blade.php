@@ -8,7 +8,7 @@
 
     <title>{{ config('app.name') }} - @yield('title')</title>
 
-    <link rel="icon" href="{{ asset('assets/logo/logo.jpg') }}" type="image/*">
+    <link rel="icon" href="{{ Storage::url($setting->logo_favicon) ?? asset('assets/logo/logo.jpg') }}" type="image/*">
 
     {{-- Animation css --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />

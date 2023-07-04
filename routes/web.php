@@ -58,4 +58,13 @@ Route::group([
         Route::get('/scan', [ScanController::class, 'index'])->name('scan.index');
         Route::post('/scan/validasi_qrcode', [ScanController::class, 'validasiQrCode'])->name('scan.validasi_qrcode');
     });
+
+    Route::get('/storage-link', function () {
+        Artisan::call('storage:link');
+        return 'Storage Success';
+    });
+    Route::get('/route-cache', function () {
+        Artisan::call('route:cache');
+        return 'Route cache cleared! <br> Routes cached successfully!';
+    });
 });

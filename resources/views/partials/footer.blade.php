@@ -1,3 +1,3 @@
 <footer class="main-footer">
-    <strong>SISTEM INFORMASI PARKIR QRCODE PHB</strong>
+    <strong>{{ $setting->nama_aplikasi ?? $setting->singkatan_aplikasi ?? config('app.name') }}</strong>
 </footer>

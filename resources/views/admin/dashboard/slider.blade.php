@@ -13,15 +13,19 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <img class="d-block" style="width: 100%; height: 295px"
-                                        src="{{ asset('assets/images/slide-1.jpg') }}" alt="First slide">
+                                        src="{{ Storage::url($setting->slide1) ?? '' }}" alt="First slide">
                                 </div>
                                 <div class="carousel-item">
                                     <img class="d-block" style="width: 100%; height: 295px"
-                                        src="{{ asset('assets/images/slide-2.jpg') }}" alt="Second slide">
+                                        src="{{ Storage::url($setting->slide2) ?? '' }}" alt="Second slide">
                                 </div>
                                 <div class="carousel-item">
                                     <img class="d-block" style="width: 100%; height: 295px"
-                                        src="{{ asset('assets/images/slide-3.jpg') }}" alt="Third slide">
+                                        src="{{ Storage::url($setting->slide3) ?? '' }}" alt="Third slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block" style="width: 100%; height: 295px"
+                                        src="{{ Storage::url($setting->slide4) ?? '' }}" alt="Third slide">
                                 </div>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button"

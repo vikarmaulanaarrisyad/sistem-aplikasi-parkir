@@ -67,20 +67,32 @@ class SettingController extends Controller
                 'logo_favicon' => 'required|mimes:png,jpg,jpeg|max:2048',
                 'login_header' => 'required|mimes:png,jpg,jpeg|max:2048',
                 'logo_login' => 'required|mimes:png,jpg,jpeg|max:2048',
+                'slide1' => 'required|mimes:png,jpg,jpeg|max:2048',
+                'slide2' => 'required|mimes:png,jpg,jpeg|max:2048',
+                'slide3' => 'required|mimes:png,jpg,jpeg|max:2048',
+                'slide4' => 'required|mimes:png,jpg,jpeg|max:2048',
             ];
         }
 
         $message = [
-            'logo_aplikasi.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
-            'logo_aplikasi.max' => 'Logo berukuran maksimal 2MB.',
-            'logo_header.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
-            'logo_header.max' => 'Logo berukuran maksimal 2MB.',
-            'logo_favicon.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
-            'logo_favicon.max' => 'Logo berukuran maksimal 2MB.',
-            'login_header.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
-            'login_header.max' => 'Logo berukuran maksimal 2MB.',
+            'logo_aplikasi.mimes' => 'Gambar harus bertipe png,jpg,jpeg.',
+            'logo_aplikasi.max' => 'Gambar berukuran maksimal 2MB.',
+            'logo_header.mimes' => 'Gambar harus bertipe png,jpg,jpeg.',
+            'logo_header.max' => 'Gambar berukuran maksimal 2MB.',
+            'logo_favicon.mimes' => 'Gambar harus bertipe png,jpg,jpeg.',
+            'logo_favicon.max' => 'Gambar berukuran maksimal 2MB.',
+            'login_header.mimes' => 'Gambar harus bertipe png,jpg,jpeg.',
+            'login_header.max' => 'Gambar berukuran maksimal 2MB.',
             'logo_login.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
-            'logo_login.max' => 'Logo berukuran maksimal 2MB.',
+            'logo_login.max' => 'Gambar berukuran maksimal 2MB.',
+            'slide1.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
+            'slide1.max' => 'Gambar berukuran maksimal 2MB.',
+            'slide2.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
+            'slide2.max' => 'Gambar berukuran maksimal 2MB.',
+            'slide3.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
+            'slide3.max' => 'Gambar berukuran maksimal 2MB.',
+            'slide4.mimes' => 'Logo harus bertipe png,jpg,jpeg.',
+            'slide4.max' => 'Gambar berukuran maksimal 2MB.',
 
             'nama_aplikasi.required' => 'Nama aplikasi wajib diisi.',
             'nama_singkatan.required' => 'Singkatan aplikasi wajib diisi.',
@@ -92,7 +104,7 @@ class SettingController extends Controller
             return response()->json(['errors' => $validator->errors(), 'message' => 'Silakan periksa kembali isian Anda dan coba kembali.'], 422);
         }
 
-        $data = $request->except('logo_aplikasi', 'logo_header', 'logo_favicon', 'login_header', 'logo_login');
+        $data = $request->except('logo_aplikasi', 'logo_header', 'logo_favicon', 'login_header', 'logo_login','slide1', 'slide2', 'slide3', 'slide4');
 
         if ($request->hasFile('logo_aplikasi')) {
             if (Storage::disk('public')->exists($setting->logo_aplikasi)) {
@@ -127,6 +139,34 @@ class SettingController extends Controller
                 Storage::disk('public')->delete($setting->logo_login);
             }
             $data['logo_login'] = upload('setting', $request->file('logo_login'), 'setting');
+        }
+
+        if ($request->hasFile('slide1')) {
+            if (Storage::disk('public')->exists($setting->slide1)) {
+                Storage::disk('public')->delete($setting->slide1);
+            }
+            $data['slide1'] = upload('setting', $request->file('slide1'), 'setting');
+        }
+
+        if ($request->hasFile('slide2')) {
+            if (Storage::disk('public')->exists($setting->slide2)) {
+                Storage::disk('public')->delete($setting->slide2);
+            }
+            $data['slide2'] = upload('setting', $request->file('slide2'), 'setting');
+        }
+
+        if ($request->hasFile('slide3')) {
+            if (Storage::disk('public')->exists($setting->slide3)) {
+                Storage::disk('public')->delete($setting->slide3);
+            }
+            $data['slide3'] = upload('setting', $request->file('slide3'), 'setting');
+        }
+
+        if ($request->hasFile('slide4')) {
+            if (Storage::disk('public')->exists($setting->slide4)) {
+                Storage::disk('public')->delete($setting->slide4);
+            }
+            $data['slide4'] = upload('setting', $request->file('slide4'), 'setting');
         }
 
         $setting->update($data);

@@ -27,10 +27,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="nama_singkatan">Pengaturan <span class="text-danger"
+                                    <label for="singkatan_aplikasi">Pengaturan <span class="text-danger"
                                             style="font-size: 0.80em;">Nama Singkatan Aplikasi</span></label>
-                                    <input id="nama_singkatan" class="form-control form-control-border" type="text"
-                                        value="{{ $setting->nama_singkatan }}" name="nama_singkatan"
+                                    <input id="singkatan_aplikasi" class="form-control form-control-border" type="text"
+                                        value="{{ $setting->singkatan_aplikasi }}" name="singkatan_aplikasi"
                                         placeholder="Tuliskan singkatan nama aplikasi" autocomplete="off">
                                 </div>
                             </div>
@@ -45,6 +45,9 @@
                                 </div>
                             </div>
                         </div>
+
+                        <hr>
+
 
                         <div class="row">
                             <div class="col-lg-3">
@@ -79,6 +82,45 @@
                                             style="font-size: 0.80em;">Login</span></label>
 
                                     <input class="form-control" name="logo_login" type="file">
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                         <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="slide1">Pengaturan <span class="text-danger"
+                                            style="font-size: 0.80em;">Gambar Slide 1</span></label>
+
+                                    <input class="form-control" name="slide1" type="file">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="slide2">Pengaturan <span class="text-danger"
+                                            style="font-size: 0.80em;">Gambar Slide 2</span></label>
+
+                                    <input class="form-control" name="slide2" type="file">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="slide3">Pengaturan <span class="text-danger"
+                                            style="font-size: 0.80em;">Gambar Slide 3</span></label>
+
+                                    <input class="form-control" name="slide3" type="file">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="slide4">Pengaturan <span class="text-danger"
+                                            style="font-size: 0.80em;">Gambar Slide 4</span></label>
+
+                                    <input class="form-control" name="slide4" type="file">
                                 </div>
                             </div>
                         </div>

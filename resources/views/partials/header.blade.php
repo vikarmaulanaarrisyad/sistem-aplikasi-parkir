@@ -6,7 +6,7 @@
          </li>
          <li class="nav-item d-none d-sm-inline-block">
              <a class="nav-link animasi-teks text-bold">
-                 SISTEM INFORMASI PARKIR QRCODE PHB
+                 {{ $setting->nama_aplikasi ?? $setting->singkatan_aplikasi ?? config('app.name') }}
              </a>
          </li>
      </ul>

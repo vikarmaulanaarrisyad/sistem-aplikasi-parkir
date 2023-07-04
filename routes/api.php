@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\ParkirApiController;
+use App\Http\Controllers\API\ParkirApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

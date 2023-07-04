@@ -118,7 +118,8 @@ class ParkirApiController extends Controller
             ->first();
 
         //define validation rules
-        $validator = Validator::make($request->all(),
+        $validator = Validator::make(
+            $request->all(),
             [
                 'foto_wajah'     => 'required|mimes:png,jpg,jpeg',
                 'foto_plat'   => 'required|mimes:png,jpg,jpeg',
@@ -133,7 +134,7 @@ class ParkirApiController extends Controller
         //check if image is not empty
         if ($request->hasFile('foto_wajah') && $request->hasFile('foto_plat')) {
             if (Storage::disk('public')->exists($parkir->foto_wajah) && Storage::disk('public')->exists($parkir->foto_plat)) {
-                
+
                 Storage::disk('public')->delete($parkir->foto_wajah);
                 Storage::disk('public')->delete($parkir->foto_plat);
             }
@@ -142,10 +143,12 @@ class ParkirApiController extends Controller
             $data['foto_plat'] = upload('plat', $request->file('foto_plat'), 'parkir');
         }
 
+        $data['is_cam1'] = 1;
+        $data['is_cam2'] = 1;
+
         $parkir->update($data);
 
         //return response
         return new ParkirApiResource(true, 'Data Parkir Berhasil Diubah!', $parkir);
     }
-
 }

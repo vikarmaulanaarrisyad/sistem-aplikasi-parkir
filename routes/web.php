@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     DashboardController,
     ParkirController,
     PetugasController,
+    ReportController,
     ScanController,
     SettingController,
     UserProfileInformationController
@@ -46,6 +47,13 @@ Route::group([
         //route parkir
         Route::get('/parkir/data', [ParkirController::class, 'data'])->name('parkir.data');
         Route::resource('parkir', ParkirController::class)->except('edit', 'create');
+
+        //route report
+        Route::controller(ReportController::class)->group(function () {
+            Route::get('/report', 'index')->name('report.index');
+            Route::get('/report/data/{start}/{end}', 'data')->name('report.data');
+            Route::post('/report/pdf/{start}/{end}', 'exportPDF');
+        });
 
         Route::resource('setting', SettingController::class);
     });

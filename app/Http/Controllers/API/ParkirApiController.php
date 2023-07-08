@@ -110,45 +110,39 @@ class ParkirApiController extends Controller
      */
     public function uploadImage(Request $request)
     {
-        //return single parkir as a resource
-        $parkir = Parkir::whereNotNull('is_cam1')
-            ->whereNotNull('is_cam2')
-            ->latest()
-            ->take(1)
+        $parkir = Parkir::orderBy('id', 'DESC')
             ->first();
 
-        //define validation rules
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'foto_wajah'     => 'required|mimes:png,jpg,jpeg',
-                'foto_plat'   => 'required|mimes:png,jpg,jpeg',
-            ]
-        );
-
-        //check if validation fails
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+        // Check if $parkir exists
+        if (!$parkir) {
+            return new ParkirApiResource(false, 'Data Parkir tidak ditemukan!', $parkir);
         }
 
-        //check if image is not empty
-        if ($request->hasFile('foto_wajah') && $request->hasFile('foto_plat')) {
-            if (Storage::disk('public')->exists($parkir->foto_wajah) && Storage::disk('public')->exists($parkir->foto_plat)) {
-
-                Storage::disk('public')->delete($parkir->foto_wajah);
-                Storage::disk('public')->delete($parkir->foto_plat);
+        if ($parkir->is_cam1 == '0') {
+            if ($request->hasFile('foto_wajah')) {
+                if (Storage::disk('public')->exists($parkir->foto_wajah)) {
+                    Storage::disk('public')->delete($parkir->foto_wajah);
+                }
+                $parkir->foto_wajah = upload('wajah', $request->file('foto_wajah'), 'wajah');
+                $parkir->is_cam1 = $parkir->is_cam1;
+                $parkir->is_cam2 = '0';
             }
-
-            $data['foto_wajah'] = upload('wajah', $request->file('foto_wajah'), 'parkir');
-            $data['foto_plat'] = upload('plat', $request->file('foto_plat'), 'parkir');
+            $parkir->is_cam2 = '0';
+            $parkir->is_cam1 = '1';
         }
 
-        $data['is_cam1'] = 1;
-        $data['is_cam2'] = 1;
+        if ($parkir->is_cam2 == '0') {
+            if ($request->hasFile('foto_plat')) {
+                if (Storage::disk('public')->exists($parkir->foto_plat)) {
+                    Storage::disk('public')->delete($parkir->foto_plat);
+                }
+                $parkir->foto_plat = upload('plat', $request->file('foto_plat'), 'plat');
+                $parkir->is_cam2 =  '1';
+            }
+        }
 
-        $parkir->update($data);
+        $parkir->save();
 
-        //return response
-        return new ParkirApiResource(true, 'Data Parkir Berhasil Diubah!', $parkir);
+        return new ParkirApiResource(true, 'Data Parkir berhasil diubah!', $parkir);
     }
 }

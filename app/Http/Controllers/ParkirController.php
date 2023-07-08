@@ -36,7 +36,7 @@ class ParkirController extends Controller
             ->addColumn('foto_wajah', function ($query) {
                 if (isEmpty($query->foto_wajah)) {
                     return '
-                        <img src="' . Storage::url($query->foto_wajah) . '" style="width: 40px">
+                        <img src="' . Storage::url($query->foto_wajah) . '" style="width: 50%">
                     ';
                 }
                 return '
@@ -46,11 +46,11 @@ class ParkirController extends Controller
             ->addColumn('foto_plat', function ($query) {
                 if (!empty($query->foto_plat)) {
                     return '
-                        <img src="' . Storage::url($query->foto_plat) . '" style="width: 40px">
+                        <img src="' . Storage::url($query->foto_plat) . '" style="width: 50%">
                     ';
                 }
                 return '
-                    <img src="' . asset('assets/images/not.png') . '" class="thumbnail img-responsive" style="width:40px">
+                    <img src="' . asset('assets/images/not.png') . '" class="thumbnail img-responsive" style="width:50%">
                 ';
             })
             ->editColumn('status', function ($query) {

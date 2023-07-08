@@ -1,6 +1,6 @@
 <x-modal data-backdrop="static" data-keyboard="false" size="modal-md">
     <x-slot name="title">
-        Tambah
+        Tambah Daftar Petugas
     </x-slot>
 
     @method('POST')

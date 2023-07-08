@@ -3,8 +3,8 @@
     <a href="{{ route('dashboard') }}" class="brand-link bg-primary bg-light">
         <img src="{{ Storage::url($setting->logo_header) ?? asset('assets/logo/logo.png') }}" alt="AdminLTE Logo"
             class="" style=" width: 50%; height: 50%; margin-left: auto; margin-right: auto;display: block;">
-            {{-- <span class="brand-text font-weight-light" style="margin-left: auto; margin-right: auto;">{{ config('app.name') }}</span> --}}
-        </a>
+        {{-- <span class="brand-text font-weight-light" style="margin-left: auto; margin-right: auto;">{{ config('app.name') }}</span> --}}
+    </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -63,13 +63,23 @@
                 @if (auth()->user()->hasRole('admin'))
                     {{-- <li class="nav-header">REPORT</li>
                      <li class="nav-item">
-                         <a href="{{ route('dashboard') }}" class="nav-link">
+                         <a href="{{ route('report.index') }}" class="nav-link">
                              <i class="nav-icon fas fa-file-pdf"></i>
                              <p>
                                  Laporan
                              </p>
                          </a>
                      </li> --}}
+                    <li class="nav-header">PENGATURAN APLIKASI</li>
+                    <li class="nav-item">
+                        <a href="{{ route('setting.index') }}"
+                            class="nav-link {{ request()->is('admin/setting*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-cogs"></i>
+                            <p>
+                                Pengaturan
+                            </p>
+                        </a>
+                    </li>
                 @else
                     <li class="nav-item">
                         <a href="{{ route('scan.index') }}"
@@ -81,16 +91,7 @@
                         </a>
                     </li>
                 @endif
-                <li class="nav-header">PENGATURAN APLIKASI</li>
-                <li class="nav-item">
-                    <a href="{{ route('setting.index') }}"
-                        class="nav-link {{ request()->is('admin/setting*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>
-                            Pengaturan
-                        </p>
-                    </a>
-                </li>
+
                 <li class="nav-header">MANAJEMEN AKUN</li>
                 <li class="nav-item">
                     <a href="{{ route('profile.show') }}"

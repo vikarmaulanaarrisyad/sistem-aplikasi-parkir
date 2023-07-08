@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-5">
+        <section class="col-md-5 connectedSortable ui-sortable">
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h5>
@@ -22,13 +22,15 @@
                     <div id="reader" width="100%"></div>
                 </div>
                 <div class="card-footer">
-                    <p class="text-justify text-info text-1x">Jika QR Code pada karcis kendaraan tidak terdeteksi oleh sistem silahkan
+                    <p class="text-justify text-info text-1x">Jika QR Code pada karcis kendaraan tidak terdeteksi oleh
+                        sistem silahkan
                         tambahkan manual parkir kendaraan secara manual</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="col-md-7">
+
+        <section class="col-md-7 connectedSortable ui-sortable">
             <x-card>
                 <table class="table table-bordered" style="width: 100%">
                     <thead>
@@ -71,7 +73,9 @@
                     </thead>
                 </table>
             </x-card>
-        </div>
+        </section>
+
+
     </div>
 @endsection
 

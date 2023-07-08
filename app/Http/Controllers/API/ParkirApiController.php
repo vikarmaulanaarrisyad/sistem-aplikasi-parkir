@@ -113,6 +113,16 @@ class ParkirApiController extends Controller
         $parkir = Parkir::orderBy('id', 'DESC')
             ->first();
 
+        //define validation rules
+        $validator = Validator::make($request->all(), [
+            'foto_wajah'     => 'required|mimes:png,jpg,jpeg',
+        ]);
+
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         // Check if $parkir exists
         if (!$parkir) {
             return new ParkirApiResource(false, 'Data Parkir tidak ditemukan!', $parkir);

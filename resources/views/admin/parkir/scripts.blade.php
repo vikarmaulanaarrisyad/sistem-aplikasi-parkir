@@ -14,7 +14,11 @@
             processing: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('report.data', compact('start', 'end')) }}'
+                url: '{{ route('parkir.data') }}',
+                data: function(e) {
+                    e.filter_status = $('#filter_status').val();
+                    e.filter_petugas = $('#filter_petugas').val();
+                }
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -22,7 +26,14 @@
                     sortable: false
                 },
                 {
-                    data: 'tanggal'
+                    data: 'foto_wajah',
+                    searchable: false,
+                    sortable: false
+                },
+                {
+                    data: 'foto_plat',
+                    searchable: false,
+                    sortable: false
                 },
                 {
                     data: 'status'
@@ -31,17 +42,13 @@
                     data: 'petugas'
                 },
                 {
-                    data: 'jammasuk'
+                    data: 'waktu_masuk'
                 },
                 {
-                    data: 'jamkeluar'
+                    data: 'waktu_keluar'
                 },
 
-            ],
-            paginate: false,
-            searching: false,
-            bInfo: false,
-            order: []
+            ]
         });
 
         $('#filter_status').change(function() {
@@ -160,7 +167,7 @@
             })
             swalWithBootstrapButtons.fire({
                 title: 'Apakah anda yakin?',
-                text: 'Anda akan menghapus parkir ' + name +
+                text: 'Anda akan menghapus petugas ' + name +
                     ' !',
                 icon: 'warning',
                 showCancelButton: true,
@@ -198,6 +205,16 @@
                         });
                 }
             })
+        }
+
+        function importForm(url, title = 'Import Petugas') {
+            $(modal2).modal('show');
+            $(`${modal2} .modal-title`).text(title);
+            $(`${modal2} form`).attr('action', url);
+            $(`${modal2} [name=_method]`).val('POST');
+            $('#spinner-border').hide();
+            $(button).prop('disabled', false);
+            resetForm(`${modal2} form`);
         }
     </script>
 @endpush

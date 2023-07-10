@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('/parkir', ParkirApiController::class);
 Route::post('/parkir/upload_image', [ParkirApiController::class, 'uploadImage']);
+Route::post('/parkir/upload', [ParkirApiController::class, 'uploadImage1']);

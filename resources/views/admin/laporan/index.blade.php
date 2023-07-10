@@ -41,4 +41,4 @@
 @includeIf('include.datatable')
 @include('include.datepicker')
 
-@include('admin.parkir.scripts')
+@include('admin.laporan.scripts')

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card card-primary card-outline">
             <div class="ribbon-wrapper">
                 <div class="ribbon bg-primary">
@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
         <div class="card card-primary card-outline">
             <div class="card-header">
                 Statistik
@@ -53,6 +53,6 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
 </div>

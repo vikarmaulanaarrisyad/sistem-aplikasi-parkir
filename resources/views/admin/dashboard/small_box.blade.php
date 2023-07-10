@@ -13,9 +13,7 @@
                     {{ $totalPetugas }}
                 </span>
             </div>
-
         </div>
-
     </div>
 
     <div class="col-12 col-sm-6 col-md-3">
@@ -30,11 +28,8 @@
                 <span class="info-box-text">Total Parkir Keluar</span>
                 <span class="info-box-number">{{ $totalParkirKeluar }}</span>
             </div>
-
         </div>
-
     </div>
-
 
     <div class="clearfix hidden-md-up"></div>
     <div class="col-12 col-sm-6 col-md-3">

@@ -61,15 +61,15 @@
                 @endif
 
                 @if (auth()->user()->hasRole('admin'))
-                    {{-- <li class="nav-header">REPORT</li>
+                    <li class="nav-header">REPORT</li>
                      <li class="nav-item">
-                         <a href="{{ route('report.index') }}" class="nav-link">
+                         <a href="{{ route('report.index') }}" class="nav-link {{ request()->is('admin/report') ? 'active' : '' }}">
                              <i class="nav-icon fas fa-file-pdf"></i>
                              <p>
                                  Laporan
                              </p>
                          </a>
-                     </li> --}}
+                     </li>
                     <li class="nav-header">PENGATURAN APLIKASI</li>
                     <li class="nav-item">
                         <a href="{{ route('setting.index') }}"

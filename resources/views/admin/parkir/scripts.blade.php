@@ -14,11 +14,7 @@
             processing: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('parkir.data') }}',
-                data: function(e) {
-                    e.filter_status = $('#filter_status').val();
-                    e.filter_petugas = $('#filter_petugas').val();
-                }
+                url: '{{ route('report.data', compact('start', 'end')) }}'
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -26,14 +22,7 @@
                     sortable: false
                 },
                 {
-                    data: 'foto_wajah',
-                    searchable: false,
-                    sortable: false
-                },
-                {
-                    data: 'foto_plat',
-                    searchable: false,
-                    sortable: false
+                    data: 'tanggal'
                 },
                 {
                     data: 'status'
@@ -42,13 +31,17 @@
                     data: 'petugas'
                 },
                 {
-                    data: 'waktu_masuk'
+                    data: 'jammasuk'
                 },
                 {
-                    data: 'waktu_keluar'
+                    data: 'jamkeluar'
                 },
 
-            ]
+            ],
+            paginate: false,
+            searching: false,
+            bInfo: false,
+            order: []
         });
 
         $('#filter_status').change(function() {

@@ -52,7 +52,8 @@ Route::group([
         Route::controller(ReportController::class)->group(function () {
             Route::get('/report', 'index')->name('report.index');
             Route::get('/report/data/{start}/{end}', 'data')->name('report.data');
-            Route::post('/report/pdf/{start}/{end}', 'exportPDF');
+            Route::get('/report/pdf/{start}/{end}', 'exportPDF')->name('report.export_pdf');
+            Route::get('/report/excel/{start}/{end}', 'exportExcel')->name('report.export_excel');
         });
 
         Route::resource('setting', SettingController::class);

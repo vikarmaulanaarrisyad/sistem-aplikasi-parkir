@@ -30,7 +30,8 @@ class User extends Authenticatable
         'password',
         'username',
         'role_id',
-        'path_image'
+        'path_image',
+        'pass',
     ];
 
     /**

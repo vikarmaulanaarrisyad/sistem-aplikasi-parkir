@@ -10,4 +10,8 @@ class UserProfileInformationController extends Controller
     {
         return view('profile.update-password-form');
     }
+    public function showResetPassword()
+    {
+        return view('profile.reset-password-form');
+    }
 }

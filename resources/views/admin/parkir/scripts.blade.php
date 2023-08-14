@@ -18,6 +18,7 @@
                 data: function(e) {
                     e.filter_status = $('#filter_status').val();
                     e.filter_petugas = $('#filter_petugas').val();
+                    e.filter_bulan = $('#filter_bulan').val();
                 }
             },
             columns: [{
@@ -60,9 +61,14 @@
             table.ajax.reload();
         });
 
+        $('#filter_bulan').change(function() {
+            table.ajax.reload();
+        });
+
         function resetFilter() {
             $('#filter_status').val('');
             $('#filter_petugas').val('');
+            $('#filter_bulan').val('');
             table.ajax.reload();
         }
 
@@ -205,16 +211,6 @@
                         });
                 }
             })
-        }
-
-        function importForm(url, title = 'Import Petugas') {
-            $(modal2).modal('show');
-            $(`${modal2} .modal-title`).text(title);
-            $(`${modal2} form`).attr('action', url);
-            $(`${modal2} [name=_method]`).val('POST');
-            $('#spinner-border').hide();
-            $(button).prop('disabled', false);
-            resetForm(`${modal2} form`);
         }
     </script>
 @endpush

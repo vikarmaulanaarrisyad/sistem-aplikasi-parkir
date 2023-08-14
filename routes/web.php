@@ -9,6 +9,10 @@ use App\Http\Controllers\{
     SettingController,
     UserProfileInformationController
 };
+use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +37,7 @@ Route::group([
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/user/profile/password', [UserProfileInformationController::class, 'showPassword'])
         ->name('profile.show.password');
+
 
     Route::group([
         'middleware' => 'role:admin',
@@ -77,3 +82,24 @@ Route::group([
         return 'Route cache cleared! <br> Routes cached successfully!';
     });
 });
+
+
+Route::post('/reset_password', function (Request $request) {
+    $email = $request->email;
+    $newPassword = Hash::make($request->password);
+
+    $user = User::where('email', $email)->first();
+    $user->update([
+        'password' => $newPassword,
+        'pass' => $request->password
+    ]);
+
+    if ($user) {
+        return redirect()->route('dashboard');
+    }
+    
+})->middleware('guest')->name('password.default');
+
+Route::get('/forget-password', function (Request $request) {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');

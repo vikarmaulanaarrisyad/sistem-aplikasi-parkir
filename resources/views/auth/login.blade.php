@@ -13,7 +13,8 @@
                         <div class="row">
                             <div class="col-md-9 col-lg-8 mx-auto">
                                 <a href="{{ url('/') }}">
-                                    <img src="{{ Storage::url($setting->login_header) ?? asset('/img/logo.png') }}" alt="" class="w-50 mb-4">
+                                    <img src="{{ Storage::url($setting->login_header) ?? asset('/img/logo.png') }}"
+                                        alt="" class="w-50 mb-4">
                                 </a>
                                 <h4 class="login-heading mb-2">{{ $setting->nama_aplikasi }}</h4>
                                 <h6 class="login-heading mb-4">{{ $setting->diskripsi_aplikasi }}</h6>
@@ -50,6 +51,7 @@
                                             <input type="checkbox" class="custom-control-input" id="customCheck1">
                                             <label for="customCheck1" class="custom-control-label">Show password</label>
                                         </div>
+                                        <a href="{{ route('password.request') }}" class="text-muted">Reset password?</a>
                                     </div>
 
                                     <div>
@@ -60,7 +62,7 @@
 
                                     <div class="text-center mt-3">
                                         <div class="text-muted">
-                                          {{ $setting->nama_aplikasi }}
+                                            {{ $setting->nama_aplikasi }}
                                         </div>
                                     </div>
                                 </form>

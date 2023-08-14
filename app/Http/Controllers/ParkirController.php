@@ -29,7 +29,9 @@ class ParkirController extends Controller
             })
             ->when($request->has('filter_petugas') != "" && $request->filter_petugas != "",  function ($q) use ($request) {
                 $q->where('petugas_id', $request->filter_petugas);
-            })->orderBy('id','DESC');
+            })
+            ->whereMonth('created_at', $request->filter_bulan)
+            ->orderBy('id', 'DESC');
 
         return datatables($query)
             ->addIndexColumn()
